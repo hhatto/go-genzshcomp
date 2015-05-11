@@ -3,7 +3,7 @@
 
 ## Installation
 ```
-$ go get bitbucket.org/hhatto/go-genzshcomp
+$ go get github.com/hhatto/go-genzshcomp
 ```
 
 

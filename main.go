@@ -51,7 +51,7 @@ func parse(line string) {
 }
 
 func printZshCompletionFunction() {
-	fmt.Printf("#compdef %s\n\n", AppName)
+	fmt.Printf("#compdef %s\n", AppName)
 	fmt.Println(Header)
 	for _, opt := range Options {
 		f := FlagSet.Lookup(opt)

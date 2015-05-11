@@ -21,6 +21,7 @@ local context state line
 _arguments -s -S \`
 var regexAppName = regexp.MustCompile("^Usage of (.+?):$")
 var regexOptionLine = regexp.MustCompile("  -(.+?)=(.+?): (.+?)$")
+var regexOptionLineNonArg = regexp.MustCompile("  -(.+?)=: (.+?)$")
 var FlagSet *flag.FlagSet
 var AppName string
 var Options []string = []string{}
@@ -47,7 +48,16 @@ func parse(line string) {
 	if len(match) != 0 {
 		FlagSet.String(match[1], match[2], match[3])
 		Options = append(Options, match[1])
+		return
 	}
+
+	match = regexOptionLineNonArg.FindStringSubmatch(line)
+	if len(match) != 0 {
+		FlagSet.String(match[1], "", match[2])
+		Options = append(Options, match[1])
+		return
+	}
+
 }
 
 func printZshCompletionFunction() {
